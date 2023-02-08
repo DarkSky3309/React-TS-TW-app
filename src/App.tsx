@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import BoardComponent from "./components/BoardComponent";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="bg-amber-400">
+    <div className="w-screen h-screen flex justify-center align-middle">
+      <BoardComponent/>
     </div>
   )
 }
