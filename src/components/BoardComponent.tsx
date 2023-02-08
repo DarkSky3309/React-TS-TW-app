@@ -16,9 +16,10 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
             selectedCell.moveFigure(cell);
             setSelectedCell(null);
             updateBoard()
-        } else {
+        } else if (cell.figure) {
             setSelectedCell(cell)
         }
+
     }
 
     useEffect(() => {highlightCells()}, [selectedCell])
