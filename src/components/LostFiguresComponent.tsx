@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import {Figure} from "../models/figures/Figure";
 
 interface LostFiguresProps {

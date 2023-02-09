@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {memo, useEffect, useState} from 'react'
 import './App.css'
 import BoardComponent from "./components/BoardComponent";
 import {Board} from "./models/Board";
@@ -6,7 +6,7 @@ import {Player} from "./models/Player";
 import {Colors} from "./models/Colors";
 import LostFiguresComponent from "./components/LostFiguresComponent";
 
-function App() {
+const App = memo(() => {
     const [board, setBoard] = useState(new Board())
     const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
     const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
@@ -40,6 +40,6 @@ function App() {
 
         </div>
     )
-}
+})
 
 export default App

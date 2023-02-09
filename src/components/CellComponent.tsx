@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import {Cell} from "../models/Cell";
 
 interface CellProps {

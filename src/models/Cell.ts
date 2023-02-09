@@ -29,6 +29,7 @@ export class Cell {
         figure.color === Colors.BLACK ?
             this.board.lostBlackFigures.push(figure) :
             this.board.lostWhiteFigures.push(figure)
+
     }
     moveFigure(target: Cell) {
         if (this.figure && this.figure?.canMove(target)) {
