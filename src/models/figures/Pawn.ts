@@ -18,15 +18,20 @@ export class Pawn extends Figure {
         if (!super.canMove(target)) {
             return false
         }
-
         const direction = this.cell.figure?.color === Colors.BLACK ? 1 : -1
         const firstStepDirection = this.cell.figure?.color === Colors.BLACK ? 2 : -2
-        if (!this.cell.board.getCell(this.cell.x, this.cell.y + direction).isEmpty())
+        //Attack
+        if (target.y === this.cell.y + direction && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1) && this.cell.isEnemy(target)) {
+            return true
+        }
+        if (!this.cell.board.getCell(this.cell.x, this.cell.y + direction).isEmpty() && this.isFirstStep)
             return false
         if ((target.y === this.cell.y + direction || this.isFirstStep && (target.y === this.cell.y + firstStepDirection))
-        && target.x === this.cell.x
-        && this.cell.board.getCell(target.x, target.y).isEmpty())
+            && target.x === this.cell.x
+            && this.cell.board.getCell(target.x, target.y).isEmpty())
             return true
+
+
         return false
     }
 
