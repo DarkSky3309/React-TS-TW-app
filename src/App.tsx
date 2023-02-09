@@ -4,6 +4,7 @@ import BoardComponent from "./components/BoardComponent";
 import {Board} from "./models/Board";
 import {Player} from "./models/Player";
 import {Colors} from "./models/Colors";
+import LostFiguresComponent from "./components/LostFiguresComponent";
 
 function App() {
     const [board, setBoard] = useState(new Board())
@@ -29,6 +30,14 @@ function App() {
     return (
         <div className="w-screen h-screen flex justify-center items-center">
             <BoardComponent board={board} setBoard={setBoard} currentPlayer={currentPlayer} swapPlayer={swapPlayer}/>
+            <div>
+                <LostFiguresComponent title={"Black figures"}
+                                      figures={board.lostBlackFigures}/>
+                <LostFiguresComponent title={"White figures"}
+                                      figures={board.lostWhiteFigures}/>
+            </div>
+
+
         </div>
     )
 }

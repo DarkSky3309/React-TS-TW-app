@@ -1,8 +1,7 @@
 
-
 .board {
-    width: calc(64px*8);
-    height: calc(64px*8);
+    width: calc(64px * 8);
+    height: calc(64px * 8);
     display: flex;
     flex-wrap: wrap;
 }
@@ -29,7 +28,7 @@
     background-color: bisque;
 }
 
-.selected{
+.selected {
     background-color: brown;
 }
 
@@ -38,4 +37,16 @@
     width: 12px;
     border-radius: 50%;
     background-color: skyblue;
+}
+
+.lost {
+    height: calc(50vh - 60px);
+    padding: 30px;
+    margin-left: 50px;
+    background-color: lightcoral;
+}
+
+.lost div {
+    display: flex;
+    justify-content: space-between;
 }
