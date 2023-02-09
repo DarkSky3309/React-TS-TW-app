@@ -39,7 +39,6 @@ export class Cell {
     }
 
     isEnemy(target: Cell):boolean {
-        console.log(this.figure?.color !== target.figure?.color)
         if (target.figure) {
             return this.figure?.color !== target.figure.color
         }
