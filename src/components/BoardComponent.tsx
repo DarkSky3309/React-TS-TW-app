@@ -8,6 +8,7 @@ import {FigureNames} from "../models/figures/Figure";
 import {Queen} from "../models/figures/Queen";
 import {Knight} from "../models/figures/Knight";
 import {Bishop} from "../models/figures/Bishop";
+import ModalWindowComponent from "./ModalWindowComponent";
 
 interface BoardProps {
     board: Board;
@@ -72,45 +73,17 @@ const BoardComponent: FC<BoardProps> = memo(({board, setBoard, currentPlayer, sw
 
 
     return (
-        <div>
+        <div className={"parent"}>
             <h3>Current Player: {currentPlayer?.color}</h3>
-            {showModal ?
                 <div className={"board"}>
-                    <div className={"modalWindow"}>
-                        <div className={"content"}>
-                            <div className={"chesses"}>
-                                {currentPlayer?.color === Colors.WHITE ? (
-                                        <>
-                                            <div onClick={() => changeFigureToKnight(cell)} className={"chess"}><img
-                                                src="src/assets/black-knight.png" alt=""/></div>
-                                            <div onClick={() => changeFigureToBishop(cell)} className={"chess"}><img
-                                                src="src/assets/black-bishop.png" alt=""/></div>
-                                            <div onClick={() => changeFigureToQueen(cell)} className={"chess"}><img
-                                                src="src/assets/black-queen.png" alt=""/></div>
-                                        </>)
-                                    :
-                                    <>
-                                        <div onClick={() => changeFigureToKnight(cell)} className={"chess"}><img
-                                            src="src/assets/white-knight.png" alt=""/></div>
-                                        <div onClick={() => changeFigureToBishop(cell)} className={"chess"}><img
-                                            src="src/assets/white-bishop.png" alt=""/></div>
-                                        <div onClick={() => changeFigureToQueen(cell)} className={"chess"}><img
-                                            src="src/assets/white-queen.png" alt=""/></div>
-                                    </>
-                                }
-                            </div>
-                            <h3>Choose your figure</h3>
-                        </div>
-                    </div>
-                </div>
-                : (<div className={"board"}>
+                    {showModal && <ModalWindowComponent currentPlayer={currentPlayer} changeFigureToKnight={changeFigureToKnight} changeFigureToQueen={changeFigureToQueen} changeFigureToBishop={changeFigureToBishop} cell={cell}/>}
+
                     {board.cells.map((row, index) =>
                         <React.Fragment key={index}>
                             {row.map(cell => <CellComponent click={click} cell={cell} key={cell.id} setCell={setCell}
                                                             selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}/>)}
                         </React.Fragment>)}
-                </div>)
-            }
+                </div>
         </div>
     );
 });

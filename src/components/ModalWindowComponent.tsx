@@ -5,13 +5,13 @@ import {Cell} from "../models/Cell";
 
 interface ModalWindowProps {
     currentPlayer: Player | null
-    changeFigureToKnight: (cell:Cell) => void
-    changeFigureToQueen: (cell:Cell) => void
-    changeFigureToBishop: (cell:Cell) => void
+    changeFigureToKnight: (cell:any) => void
+    changeFigureToQueen: (cell:any) => void
+    changeFigureToBishop: (cell:any) => void
+    cell: Cell | null
 }
-const ModalWindowComponent: FC<ModalWindowProps> = () => {
+const ModalWindowComponent: FC<ModalWindowProps> = ({currentPlayer,changeFigureToKnight, changeFigureToQueen,changeFigureToBishop, cell}) => {
     return (
-        <div className={"board"}>
             <div className={"modalWindow"}>
                 <div className={"content"}>
                     <div className={"chesses"}>
@@ -38,7 +38,6 @@ const ModalWindowComponent: FC<ModalWindowProps> = () => {
                     <h3>Choose your figure</h3>
                 </div>
             </div>
-        </div>
     );
 };
 

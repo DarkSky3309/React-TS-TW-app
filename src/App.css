@@ -4,15 +4,20 @@
     height: calc(64px * 8);
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 }
 
+
+
 .modalWindow {
-    background-color: gray;
+    position: absolute;
+    background-color: #222222BB;
     width: 100%;
     height: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 5;
 }
 
 .content {
@@ -21,6 +26,8 @@
     gap: 2rem;
     height: calc(64px * 4);
     text-align: center;
+    background-color: gray;
+    padding: 10px;
 }
 
 .content h3{
