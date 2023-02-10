@@ -1,6 +1,8 @@
 import {Colors} from "../Colors";
 import logo from "../../assets/black-bishop.png"
 import {Cell} from "../Cell";
+import {Queen} from "./Queen";
+import {Pawn} from "./Pawn";
 
 export enum FigureNames{
     FIGURE = "FIGURE",
@@ -26,9 +28,7 @@ export class Figure{
         this.name = FigureNames.FIGURE;
         this.id = Math.random();
     }
-    showWindowToChange(){
-        console.log(this.name)
-    }
+
     canMove(target:Cell):boolean {
         if (target.figure?.color === this.color)
             return false
