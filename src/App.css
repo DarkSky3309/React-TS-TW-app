@@ -1,10 +1,12 @@
 
+
 .board {
     width: calc(64px * 8);
     height: calc(64px * 8);
     display: flex;
     flex-wrap: wrap;
     position: relative;
+    margin-top: 50px;
 }
 
 
@@ -90,7 +92,7 @@
 }
 
 .black {
-    background-color: darkblue;
+    background-color: saddlebrown;
 }
 
 .white {
@@ -98,7 +100,7 @@
 }
 
 .selected {
-    background-color: brown;
+    background-color: forestgreen;
 }
 
 .available {
@@ -108,14 +110,33 @@
     background-color: skyblue;
 }
 
-.lost {
-    height: calc(50vh - 60px);
-    padding: 30px;
-    margin-left: 50px;
-    background-color: lightcoral;
+.currentPlayer {
+    text-decoration: underline;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
 }
 
-.lost div {
+.lost {
+    height: calc(70vh - 60px);
+    padding: 30px;
+    margin-left: 50px;
+    background-color: bisque;
+}
+
+.lost:first-of-type{
+    margin: 0 50px 0 0;
+}
+
+.listOfChess {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.listOfChess div{
     display: flex;
     justify-content: space-between;
+
 }

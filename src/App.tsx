@@ -29,12 +29,14 @@ const App = memo(() => {
 
     return (
         <div className="w-screen h-screen flex justify-center items-center">
+            <div className={"lost"}>
+                <LostFiguresComponent title={"White figures"}
+                                      figures={board.lostWhiteFigures}/></div>
+
             <BoardComponent board={board} setBoard={setBoard} currentPlayer={currentPlayer} swapPlayer={swapPlayer}/>
-            <div>
+            <div className={"lost"}>
                 <LostFiguresComponent title={"Black figures"}
                                       figures={board.lostBlackFigures}/>
-                <LostFiguresComponent title={"White figures"}
-                                      figures={board.lostWhiteFigures}/>
             </div>
 
 

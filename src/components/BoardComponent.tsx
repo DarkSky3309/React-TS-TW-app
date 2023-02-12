@@ -74,7 +74,7 @@ const BoardComponent: FC<BoardProps> = memo(({board, setBoard, currentPlayer, sw
 
     return (
         <div className={"parent"}>
-            <h3>Current Player: {currentPlayer?.color}</h3>
+            <h3 className={"currentPlayer"}>Current Player: {currentPlayer?.color}</h3>
                 <div className={"board"}>
                     {showModal && <ModalWindowComponent currentPlayer={currentPlayer} changeFigureToKnight={changeFigureToKnight} changeFigureToQueen={changeFigureToQueen} changeFigureToBishop={changeFigureToBishop} cell={cell}/>}
 
