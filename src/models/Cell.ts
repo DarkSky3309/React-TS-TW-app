@@ -10,6 +10,8 @@ export class Cell {
     board: Board;
     available: boolean;
     id: number;
+    isUnderAttack: boolean;
+    isUnderAttackToKing: boolean;
 
     constructor(board: Board, x: number, y: number, color: Colors, figure: Figure | null) {
         this.x = x;
@@ -18,7 +20,9 @@ export class Cell {
         this.figure = figure;
         this.board = board;
         this.available = false;
-        this.id = Math.random()
+        this.id = Math.random();
+        this.isUnderAttack = false;
+        this.isUnderAttackToKing = false;
     }
 
     setFigure(figure: Figure) {
@@ -41,6 +45,18 @@ export class Cell {
             this.figure = null;
         }
     }
+
+    moveSave(target:Cell) {
+        if (this.figure && this.figure.canSave(target)){
+            this.figure.moveFigure(target);
+            if (target.figure) {
+                this.addLostFigure(target.figure)
+            }
+            target.setFigure(this.figure);
+            this.figure = null;
+        }
+    }
+
 
     isEmpty() {
         return this.figure === null

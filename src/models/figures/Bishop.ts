@@ -11,12 +11,16 @@ export class Bishop extends Figure {
         this.name = FigureNames.BISHOP
     }
 
+    figureAttackAndMove(target:Cell):boolean{
+        if (this.cell.isEmptyDiagonal(target))
+            return true
+        return false;
+    }
+
     canMove(target: Cell): boolean {
         if(!super.canMove(target)) {
             return false
         }
-        if (this.cell.isEmptyDiagonal(target))
-            return true
-        return false;
+        return this.figureAttackAndMove(target)
     }
 }

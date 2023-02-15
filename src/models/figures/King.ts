@@ -11,16 +11,25 @@ export class King extends Figure {
         this.name = FigureNames.KING
     }
 
-    canMove(target: Cell): boolean {
-        if (!super.canMove(target)) {
-            return false
-        }
+    figureAttackAndMove(target:Cell): boolean{
         if (((this.cell.y + 1 === target.y || this.cell.y - 1 === target.y)
                 && Math.abs(target.x - this.cell.x) < 2)
             ||
             ((this.cell.x + 1 === target.x || this.cell.x - 1 === target.x)
                 && Math.abs(target.y - this.cell.y) < 2))
             return true
+
         return false
+    }
+
+    canMove(target: Cell): boolean {
+        if (!super.canMove(target)) {
+            return false
+        }
+        if (target.isUnderAttack){
+            return false
+        }
+        return this.figureAttackAndMove(target)
+
     }
 }

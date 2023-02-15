@@ -24,6 +24,8 @@ const App = memo(() => {
     }
 
     function swapPlayer() {
+        if (currentPlayer)
+        board.checkAllCellOnAttack(currentPlayer);
         setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer)
     }
 

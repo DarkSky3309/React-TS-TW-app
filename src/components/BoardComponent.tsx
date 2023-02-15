@@ -17,13 +17,17 @@ interface BoardProps {
     swapPlayer: () => void
 }
 
-const BoardComponent: FC<BoardProps> = memo(({board, setBoard, currentPlayer, swapPlayer}) => {
+const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPlayer}) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
     const [showModal, setShowModal] = useState(false)
     const [cell, setCell] = useState<Cell | null>(null)
 
     function click(cell: Cell) {
-        if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
+        console.log(board)
+        if (currentPlayer)
+            board.kingIsUnderAttack(currentPlayer)
+        if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell) && !board.whiteKingDangerous && !board.blackKingDangerous) {
+            console.log(1)
             selectedCell.moveFigure(cell);
             swapPlayer()
             checkEndBoard(cell)
@@ -67,6 +71,7 @@ const BoardComponent: FC<BoardProps> = memo(({board, setBoard, currentPlayer, sw
     }
 
     function updateBoard() {
+
         const newBoard = board.getCopyBoard;
         setBoard(newBoard);
     }
@@ -75,17 +80,20 @@ const BoardComponent: FC<BoardProps> = memo(({board, setBoard, currentPlayer, sw
     return (
         <div className={"parent"}>
             <h3 className={"currentPlayer"}>Current Player: {currentPlayer?.color}</h3>
-                <div className={"board"}>
-                    {showModal && <ModalWindowComponent currentPlayer={currentPlayer} changeFigureToKnight={changeFigureToKnight} changeFigureToQueen={changeFigureToQueen} changeFigureToBishop={changeFigureToBishop} cell={cell}/>}
+            <div className={"board"}>
+                {showModal &&
+                    <ModalWindowComponent currentPlayer={currentPlayer} changeFigureToKnight={changeFigureToKnight}
+                                          changeFigureToQueen={changeFigureToQueen}
+                                          changeFigureToBishop={changeFigureToBishop} cell={cell}/>}
 
-                    {board.cells.map((row, index) =>
-                        <React.Fragment key={index}>
-                            {row.map(cell => <CellComponent click={click} cell={cell} key={cell.id} setCell={setCell}
-                                                            selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}/>)}
-                        </React.Fragment>)}
-                </div>
+                {board.cells.map((row, index) =>
+                    <React.Fragment key={index}>
+                        {row.map(cell => <CellComponent click={click} cell={cell} key={cell.id} setCell={setCell}
+                                                        selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}/>)}
+                    </React.Fragment>)}
+            </div>
         </div>
     );
-});
+};
 
 export default BoardComponent;

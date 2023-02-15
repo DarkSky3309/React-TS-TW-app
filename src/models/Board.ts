@@ -7,11 +7,14 @@ import {Knight} from "./figures/Knight";
 import {Bishop} from "./figures/Bishop";
 import {Rook} from "./figures/Rook";
 import {Figure} from "./figures/Figure";
+import {Player} from "./Player";
 
 export class Board {
     cells: Cell[][] = []
     lostBlackFigures: Figure[] = []
     lostWhiteFigures: Figure[] = []
+    whiteKingDangerous: boolean = false;
+    blackKingDangerous: boolean = false;
 
 
     public InitCells() {
@@ -34,6 +37,8 @@ export class Board {
         newBoard.cells = this.cells;
         newBoard.lostWhiteFigures = this.lostWhiteFigures
         newBoard.lostBlackFigures = this.lostBlackFigures
+        newBoard.whiteKingDangerous = this.whiteKingDangerous;
+        newBoard.blackKingDangerous = this.blackKingDangerous;
         return newBoard;
     }
 
@@ -85,8 +90,68 @@ export class Board {
         new Bishop(Colors.WHITE, this.getCell(2, 7))
     }
 
+    private findKingPosition(player: Player) {
+        for (const row of this.cells) {
+            for (const cell of row) {
+                if (cell.figure?.name === "KING" && cell.figure.color === player.color)
+                    return cell;
+            }
+        }
+    }
 
-    public getCell(x: number, y: number) {
+    public kingIsUnderAttack(player: Player) {
+        let kingPosition = this.findKingPosition(player);
+        for (const row of this.cells) {
+            for (const cell of row) {
+                if (cell.figure && cell.figure.color !== player.color && kingPosition) {
+                    if (cell.figure.canMove(kingPosition)) {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+
+    public checkAllCellOnAttack (player: Player) {
+        for (const row of this.cells) {
+            for (const cell of row) {
+                cell.isUnderAttack = false;
+            }
+        }
+        for (const row of this.cells) {
+            for (const cell of row) {
+                let figure = null;
+                if (cell.figure && cell.figure.color === player.color){
+                    figure = cell.figure
+                }
+                if (figure){
+                    for (const indexRow of this.cells) {
+                        for (const indexCell of indexRow) {
+                            if (indexCell.figure?.name === "KING" && figure?.canMove(indexCell)){
+                                if (indexCell.figure?.color === Colors.WHITE){
+                                    console.log("white king in dangerous")
+                                    this.whiteKingDangerous = true;
+                                } else if (indexCell.figure?.color === Colors.BLACK){
+                                    console.log("black king in dangerous")
+                                    this.blackKingDangerous = true;
+                                }
+                            }
+                            if (figure?.canFight(indexCell) && !this.blackKingDangerous && !this.whiteKingDangerous){
+                                indexCell.isUnderAttack = true
+                            } else if (figure?.canMove(indexCell)) {
+                                indexCell.isUnderAttack = true;
+                                indexCell.isUnderAttackToKing = true;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public getCell(x: number, y: number
+    ) {
         return this.cells[y][x]
     }
 

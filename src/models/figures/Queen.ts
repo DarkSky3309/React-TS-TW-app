@@ -10,10 +10,8 @@ export class Queen extends Figure {
         this.logo = color === Colors.WHITE ? whiteLogo : blackLogo;
         this.name = FigureNames.QUEEN
     }
-    canMove(target: Cell): boolean {
-        if(!super.canMove(target)) {
-            return false
-        }
+
+    queenAttackAndMove(target:Cell):boolean{
         if (this.cell.isEmptyVertical(target))
             return true;
         if (this.cell.isEmptyHorizontal(target))
@@ -21,5 +19,11 @@ export class Queen extends Figure {
         if (this.cell.isEmptyDiagonal(target))
             return true
         return false;
+    }
+    canMove(target: Cell): boolean {
+        if(!super.canMove(target)) {
+            return false
+        }
+        return this.queenAttackAndMove(target);
     }
 }
