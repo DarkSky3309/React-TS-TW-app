@@ -35,15 +35,7 @@ export class Figure {
         return true
     }
 
-    canSave(target:Cell):boolean {
-        if (this.cell.isEmptyVertical(target) && target.isUnderAttackToKing)
-            return true;
-        if (this.cell.isEmptyHorizontal(target) && target.isUnderAttackToKing)
-            return true
-        if (this.cell.isEmptyDiagonal(target) && target.isUnderAttackToKing)
-            return true
-        return false
-    }
+
 
     canFight(target: Cell): boolean {
         if (this.name === "BISHOP") {
@@ -88,4 +80,5 @@ export class Figure {
     moveFigure(target: Cell) {
 
     }
+
 }

@@ -36,6 +36,7 @@ export class Cell {
 
     }
     moveFigure(target: Cell) {
+        console.log(this.board)
         if (this.figure && this.figure?.canMove(target)) {
             this.figure.moveFigure(target);
             if (target.figure) {
@@ -46,16 +47,6 @@ export class Cell {
         }
     }
 
-    moveSave(target:Cell) {
-        if (this.figure && this.figure.canSave(target)){
-            this.figure.moveFigure(target);
-            if (target.figure) {
-                this.addLostFigure(target.figure)
-            }
-            target.setFigure(this.figure);
-            this.figure = null;
-        }
-    }
 
 
     isEmpty() {
