@@ -33,10 +33,8 @@ export class Cell {
         figure.color === Colors.BLACK ?
             this.board.lostBlackFigures.push(figure) :
             this.board.lostWhiteFigures.push(figure)
-
     }
     moveFigure(target: Cell) {
-        console.log(this.board)
         if (this.figure && this.figure?.canMove(target)) {
             this.figure.moveFigure(target);
             if (target.figure) {

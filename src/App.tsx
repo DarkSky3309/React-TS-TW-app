@@ -11,6 +11,9 @@ const App = memo(() => {
     const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
     const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
     const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null)
+
+
+
     useEffect(() => {
         restart()
         setCurrentPlayer(whitePlayer)
@@ -35,8 +38,8 @@ const App = memo(() => {
                 <LostFiguresComponent title={"White figures"}
                                       figures={board.lostWhiteFigures}/></div>
 
-            <BoardComponent board={board} setBoard={setBoard} currentPlayer={currentPlayer} swapPlayer={swapPlayer}/>
-            <div className={"lost"}>
+            <BoardComponent board={board} setBoard={setBoard} currentPlayer={currentPlayer} swapPlayer={swapPlayer} />
+            <div className={"lost"} >
                 <LostFiguresComponent title={"Black figures"}
                                       figures={board.lostBlackFigures}/>
             </div>

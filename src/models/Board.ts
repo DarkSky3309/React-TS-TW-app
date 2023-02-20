@@ -13,9 +13,6 @@ export class Board {
     cells: Cell[][] = []
     lostBlackFigures: Figure[] = []
     lostWhiteFigures: Figure[] = []
-    whiteKingDangerous: boolean = false;
-    blackKingDangerous: boolean = false;
-
 
     public InitCells() {
         for (let i = 0; i < 8; i++) {
@@ -32,13 +29,12 @@ export class Board {
         ;
     };
 
+
     get getCopyBoard(): Board {
         const newBoard = new Board();
         newBoard.cells = this.cells;
         newBoard.lostWhiteFigures = this.lostWhiteFigures
         newBoard.lostBlackFigures = this.lostBlackFigures
-        newBoard.whiteKingDangerous = this.whiteKingDangerous;
-        newBoard.blackKingDangerous = this.blackKingDangerous;
         return newBoard;
     }
 
@@ -99,7 +95,7 @@ export class Board {
         }
     }
 
-    public kingIsUnderAttack(player: Player) {
+    public kingIsUnderAttack(player: Player): boolean {
         let kingPosition = this.findKingPosition(player);
         for (const row of this.cells) {
             for (const cell of row) {
@@ -110,9 +106,11 @@ export class Board {
                 }
             }
         }
+        return false
     }
 
-    public checkAllCellOnAttack (player: Player) {
+
+    public checkAllCellOnAttack(player: Player) {
         for (const row of this.cells) {
             for (const cell of row) {
                 cell.isUnderAttack = false;
@@ -121,28 +119,22 @@ export class Board {
         for (const row of this.cells) {
             for (const cell of row) {
                 let figure = null;
-                if (cell.figure && cell.figure.color === player.color){
+                if (cell.figure && cell.figure.color === player.color) {
                     figure = cell.figure
                 }
-                if (figure){
+                if (figure) {
                     for (const indexRow of this.cells) {
                         for (const indexCell of indexRow) {
-                            if (indexCell.figure?.name === "KING" && figure?.canMove(indexCell)){
-                                if (indexCell.figure?.color === Colors.WHITE){
+                            if (indexCell.figure?.name === "KING" && figure?.canMove(indexCell)) {
+                                if (indexCell.figure?.color === Colors.WHITE) {
                                     console.log("white king in dangerous")
-                                    this.whiteKingDangerous = true;
-                                } else if (indexCell.figure?.color === Colors.BLACK){
+                                } else if (indexCell.figure?.color === Colors.BLACK) {
                                     console.log("black king in dangerous")
-                                    this.blackKingDangerous = true;
                                 }
                             }
-                            if (figure?.canFight(indexCell) && !this.blackKingDangerous && !this.whiteKingDangerous){
+                            if (figure?.canFight(indexCell)) {
                                 indexCell.isUnderAttack = true
-                            } else if (figure?.canMove(indexCell)) {
-                                indexCell.isUnderAttack = true;
-                                indexCell.isUnderAttackToKing = true;
                             }
-
                         }
                     }
                 }
@@ -150,8 +142,7 @@ export class Board {
         }
     }
 
-    public getCell(x: number, y: number
-    ) {
+    public getCell(x: number, y: number) {
         return this.cells[y][x]
     }
 

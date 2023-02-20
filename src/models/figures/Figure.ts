@@ -36,7 +36,6 @@ export class Figure {
     }
 
 
-
     canFight(target: Cell): boolean {
         if (this.name === "BISHOP") {
             return this.cell.isEmptyDiagonal(target);

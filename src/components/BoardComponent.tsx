@@ -23,16 +23,18 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPla
     const [cell, setCell] = useState<Cell | null>(null)
 
     function click(cell: Cell) {
-        if (currentPlayer)
-            board.kingIsUnderAttack(currentPlayer)
-        if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
-            selectedCell.moveFigure(cell);
-            swapPlayer()
-            checkEndBoard(cell)
-            setSelectedCell(null);
-        }
-        else if (cell.figure?.color === currentPlayer?.color) {
-            setSelectedCell(cell)
+        if (currentPlayer) {
+
+
+            if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
+
+                selectedCell.moveFigure(cell);
+                swapPlayer()
+                checkEndBoard(cell)
+                setSelectedCell(null);
+            } else if (cell.figure?.color === currentPlayer?.color) {
+                setSelectedCell(cell)
+            }
         }
     }
 
